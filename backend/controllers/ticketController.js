@@ -24,8 +24,14 @@ const createTicket = asyncHandler( async(req, res) => {
     res.status(201).json(ticket)
 })
 
+const getTickets = asyncHandler( async(req, res) => {
+    const tickets = await Ticket.find({})
+    res.json(tickets)
+})
+
 
 
 module.exports = {
-    createTicket
+    createTicket,
+    getTickets
 }
