@@ -1,6 +1,21 @@
 import React from 'react'
+import { FaSignInAlt, FaSignOutAlt, FaUser } from 'react-icons/fa'
+import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { reset, logout } from '../redux/auth/authSlice'
 
 const Navbar = () => {
+
+  const { user } = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const logoutHandler = () => {
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
+
   return (
     <div className='navbar'>
       <div className='logo'>
@@ -11,7 +26,7 @@ const Navbar = () => {
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
         >
-          <g clip-path='url(#clip0_3_1273)'>
+          <g clipPath='url(#clip0_3_1273)'>
             <path
               d='M176.985 11.8109V0.181885H154.089V7.63189H145.549V26.5319H167.536V36.3419L153.726 36.1599L153.908 32.5259H145.549V43.4259H176.985V19.4429H154.271V7.81388H168.263L168.081 11.8139L176.985 11.8109Z'
               fill='#F98211'
@@ -67,6 +82,22 @@ const Navbar = () => {
       </div>
 
       <div className='profile'>
+        <ul>
+          {!user ? (
+            <>
+            <li>
+              <Link to='/login'><FaSignInAlt /> Login</Link>
+            </li>
+            <li>
+              <Link to='/register'><FaUser /> Register</Link>
+            </li>
+            </>
+          ) : (
+            <li>
+              <button onClick={logoutHandler}> <FaSignOutAlt /> Logout </button>
+            </li>
+          )}
+        </ul>
         <div className='avatar'>
         <img src="./images/image2.jpeg" alt="" />
         </div>

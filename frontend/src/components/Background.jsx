@@ -11,7 +11,7 @@ const Background = () => {
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
         >
-          <g clip-path='url(#clip0_3_1306)'>
+          <g clipPath='url(#clip0_3_1306)'>
             <path
               d='M804.321 0.302246V107.037L520.063 212.311C449.58 238.42 373.799 194.765 350.803 114.744L318.202 1.25928H-0.167915L318.202 0.83953L804.321 0.302246Z'
               fill='#FDB153'
@@ -45,7 +45,7 @@ const Background = () => {
           fill='none'
           xmlns='http://www.w3.org/2000/svg'
         >
-          <g clip-path='url(#clip0_3_1607)'>
+          <g clipPath='url(#clip0_3_1607)'>
             <g filter='url(#filter0_d_3_1607)'>
               <path
                 d='M619.697 729.663L-252.43 950.264C-332.123 970.422 -417.051 938.498 -442.116 878.958L-649.745 385.741C-674.809 326.2 -630.522 261.592 -550.826 241.433L321.302 20.8319C400.998 0.671806 485.924 32.5986 510.988 92.1383L718.617 585.356C743.681 644.896 699.394 709.505 619.697 729.663Z'
@@ -73,9 +73,9 @@ const Background = () => {
               width='1402.38'
               height='961.517'
               filterUnits='userSpaceOnUse'
-              color-interpolation-filters='sRGB'
+              colorInterpolationFilters='sRGB'
             >
-              <feFlood flood-opacity='0' result='BackgroundImageFix' />
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
               <feColorMatrix
                 in='SourceAlpha'
                 type='matrix'
@@ -107,9 +107,9 @@ const Background = () => {
               width='1402.79'
               height='985.209'
               filterUnits='userSpaceOnUse'
-              color-interpolation-filters='sRGB'
+              colorInterpolationFilters='sRGB'
             >
-              <feFlood flood-opacity='0' result='BackgroundImageFix' />
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
               <feColorMatrix
                 in='SourceAlpha'
                 type='matrix'
@@ -141,9 +141,9 @@ const Background = () => {
               width='1407.51'
               height='988.865'
               filterUnits='userSpaceOnUse'
-              color-interpolation-filters='sRGB'
+              colorInterpolationFilters='sRGB'
             >
-              <feFlood flood-opacity='0' result='BackgroundImageFix' />
+              <feFlood floodOpacity='0' result='BackgroundImageFix' />
               <feColorMatrix
                 in='SourceAlpha'
                 type='matrix'
