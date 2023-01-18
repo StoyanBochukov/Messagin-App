@@ -17,8 +17,11 @@ const createTicket = asyncHandler( async(req, res) => {
         res.status(401)
         throw new Error('User not found')
     }
+    
     const ticket = await Ticket.create({
         message,
+        firstName: req.user.firstName,
+        lastName: req.user.lastName,
         user: req.user.id
     })
     res.status(201).json(ticket)

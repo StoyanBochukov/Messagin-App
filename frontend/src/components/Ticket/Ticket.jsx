@@ -1,7 +1,8 @@
 import React from 'react'
 import classes from './Ticket.module.css'
 
-const Ticket = () => {
+
+const Ticket = ({ ticket }) => {
   return (
     <div className={classes.ticketWrapper}>
       <div className={classes.profileTop}>
@@ -10,21 +11,20 @@ const Ticket = () => {
         </div>
         <div className={classes.profileName}>
           <h1>
-            Ivaylo Bachvarov <br />
+            {ticket.firstName} {ticket.lastName} <br />
             <span>Co-Founder, HackSoft</span>
           </h1>
         </div>
 
         <div className={classes.ticketTime}>
-          <p>20 minutes ago</p>
+          <p>{ticket.createdAt.substring(0, 10)}</p>
         </div>
       </div>
 
       <div className={classes.ticketContent}>
         <div className={classes.ticketText}>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae
-            obcaecati minima ipsa officia ad inventore?
+            {ticket.message}
           </p>
         </div>
         <div className={classes.ticketLikes}>
@@ -43,7 +43,7 @@ const Ticket = () => {
             />
           </svg>
 
-          <span>4</span>
+          <span>{ticket.numLikes}</span>
         </div>
       </div>
       <div className={classes.ticketShareAndLike}>

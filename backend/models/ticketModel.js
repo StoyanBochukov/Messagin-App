@@ -1,33 +1,31 @@
 const mongoose = require('mongoose')
 
-// const likeSchema = mongoose.Schema({
-//     likes: {
-//         type: Number,
-//         required: true
-//     },
-//     user:{
-//         type: mongoose.Schema.Types.ObjectId,
-//         required: true,
-//         ref: 'User'
-//     }
-// })
-
 const ticketSchema = mongoose.Schema({
-    user:{
-        type: mongoose.Schema.Types.ObjectId,
+    firstName:{
+        type: String,
         required: true,
-        ref: 'User'
+    },
+    lastName: {
+        type:String,
+        required: true
     },
     message: {
         type: String,
         required: true
     },
-    // like:[likeSchema],
     numLikes: {
         type: Number,
         required: true,
         default: 0
-    }
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
+    },
+}, {
+    timestamps: true
 })
+
 
 module.exports = mongoose.model('Ticket', ticketSchema)
