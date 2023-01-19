@@ -1,11 +1,11 @@
 import axios from "axios";
-const API_URL = '/api/tickets'
+const API_URL = '/api/tickets/'
 
 const getTickets = async() => {
     const { data } = await axios.get(API_URL)
-    // if(data){
-    //     localStorage.setItem('tickets', JSON.stringify(data))
-    // }
+    if(data){
+        localStorage.setItem('tickets', JSON.stringify(data))
+    }
     return data
 }
 
@@ -16,8 +16,15 @@ const createTicket = async(ticketData, token) => {
         }
     }
     const { data } = await axios.post(API_URL, ticketData, config)
-    console.log(data)
     return data
+}
+
+const likeTicket = async(ticketId) => {   
+    const { data } = await axios.post(API_URL + ticketId)
+    return {
+        numLikes: data.numLikes,
+        id: data._id
+    }
 }
 
 
@@ -26,7 +33,8 @@ const createTicket = async(ticketData, token) => {
 
 const ticketService = {
     getTickets,
-    createTicket
+    createTicket,
+    likeTicket
 }
 
 export default ticketService

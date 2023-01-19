@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const Ticket = require('../models/ticketModel')
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken')
+const { json } = require('express')
 
 //Create new ticket
 //POST/api/tickets
@@ -32,9 +33,24 @@ const getTickets = asyncHandler( async(req, res) => {
     res.json(tickets)
 })
 
+const likeTicket = asyncHandler( async(req, res) => {
+    const ticket = await Ticket.findById(req.params.id)
+
+    if(ticket){
+        ticket.numLikes++
+        const updatedTicket = await ticket.save()
+        res.json(updatedTicket)
+
+    }else{
+        res.status(404)
+        throw new Error('Ticket not found')
+    }
+})
+
 
 
 module.exports = {
     createTicket,
-    getTickets
+    getTickets,
+    likeTicket
 }

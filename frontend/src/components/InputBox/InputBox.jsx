@@ -38,6 +38,7 @@ const InputBox = () => {
         message
       }
       dispatch(createTicket(ticketData))
+      message = ''
       toast.success('Message submitted successfuly')
     }
   }

@@ -25,10 +25,20 @@ export const createTicket = createAsyncThunk('tickets/create', async(ticketData,
     }
 })
 
+export const likeTicket = createAsyncThunk('tickets/like', async(ticketId, thunkAPI) => {
+    try {
+        return await ticketService.likeTicket(ticketId)
+    } catch (error) {
+        const message = (error.response && error.response.data && error.response.data.message) ||
+        error.message || error.toString()
+
+        return thunkAPI.rejectWithValue(message)
+    }
+})
+
 
 const initialState = {
     tickets: [],
-    ticket: {},
     isLoading: false,
     isSuccess: false,
     isError: false,
@@ -45,7 +55,8 @@ export const ticketSlice = createSlice({
             state.isSuccess = false
             state.isError = false
             state.message = ''
-        }
+        },
+        
     },
     extraReducers:(builder) => {
         builder
@@ -69,9 +80,22 @@ export const ticketSlice = createSlice({
             state.isLoading = false
             state.isSuccess = true
             state.tickets.push(action.payload)
-            console.log(state, action)
         })
         .addCase(createTicket.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
+        })
+        .addCase(likeTicket.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(likeTicket.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            const ticket = state.tickets.find(ticket => ticket._id === action.payload.id)
+            ticket.numLikes = action.payload.numLikes
+        })
+        .addCase(likeTicket.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload

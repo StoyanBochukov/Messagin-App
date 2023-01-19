@@ -61,3 +61,18 @@
 .ticketShare{
     cursor: pointer;
 }
+@media(max-width:576px){
+    .profileTop h1{
+        font-size: 14px;
+    }
+    .profileTop span{
+        font-size: 10px;
+    }
+    .ticketTime{
+        top: -12px;
+        font-size: 12px;
+    }
+    .ticketText{
+        font-size: 15px;
+    }
+}

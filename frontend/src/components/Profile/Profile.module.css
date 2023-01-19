@@ -58,3 +58,17 @@
 .posts{
     width: 100%;
 }
+@media(max-width:576px){
+    .profileTop h1{
+        font-size: 14px;
+    }
+    .profileTop span{
+        font-size: 10px;
+    }
+    .profileBottom h1{
+        font-size: 14px;
+    }
+    .profileBottom span{
+        font-size: 12px;
+    }
+}

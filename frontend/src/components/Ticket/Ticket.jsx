@@ -1,8 +1,16 @@
 import React from 'react'
 import classes from './Ticket.module.css'
-
+import { useDispatch } from 'react-redux'
+import { likeTicket } from '../../redux/tickets/ticketSlice'
 
 const Ticket = ({ ticket }) => {
+  const dispatch = useDispatch()
+
+  const ticketLikeHandler = () => {
+    const ticketId = ticket._id
+    dispatch(likeTicket(ticketId))
+  }
+
   return (
     <div className={classes.ticketWrapper}>
       <div className={classes.profileTop}>
@@ -23,9 +31,7 @@ const Ticket = ({ ticket }) => {
 
       <div className={classes.ticketContent}>
         <div className={classes.ticketText}>
-          <p>
-            {ticket.message}
-          </p>
+          <p>{ticket.message}</p>
         </div>
         <div className={classes.ticketLikes}>
           <svg
@@ -47,7 +53,7 @@ const Ticket = ({ ticket }) => {
         </div>
       </div>
       <div className={classes.ticketShareAndLike}>
-        <div className={classes.ticketLike}>
+        <div className={classes.ticketLike} onClick={ticketLikeHandler}>
           <svg
             width='59'
             height='24'

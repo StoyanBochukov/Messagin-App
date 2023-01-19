@@ -36,3 +36,8 @@ button{
     cursor: pointer;
     background-color: #fd7500;
 }
+@media(max-width:576px){
+    input{
+        font-size: 10px;
+    }
+}
