@@ -1,10 +1,11 @@
 import React from 'react'
 import classes from './Ticket.module.css'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { likeTicket } from '../../redux/tickets/ticketSlice'
 
 const Ticket = ({ ticket }) => {
   const dispatch = useDispatch()
+  const { user } = useSelector(state => state.auth)
 
   const ticketLikeHandler = () => {
     const ticketId = ticket._id
@@ -15,12 +16,12 @@ const Ticket = ({ ticket }) => {
     <div className={classes.ticketWrapper}>
       <div className={classes.profileTop}>
         <div className={classes.profileImg}>
-          <img src='./images/image2.jpeg' alt='' />
+          <img src={ticket.image} alt='' />
         </div>
         <div className={classes.profileName}>
           <h1>
             {ticket.firstName} {ticket.lastName} <br />
-            <span>Co-Founder, HackSoft</span>
+            <span>{ticket.position}</span>
           </h1>
         </div>
 

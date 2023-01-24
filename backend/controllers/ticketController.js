@@ -23,7 +23,9 @@ const createTicket = asyncHandler( async(req, res) => {
         message,
         firstName: req.user.firstName,
         lastName: req.user.lastName,
-        user: req.user.id
+        user: req.user.id,
+        image: req.user.image,
+        position: req.user.position
     })
     res.status(201).json(ticket)
 })

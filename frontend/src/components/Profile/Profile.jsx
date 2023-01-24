@@ -1,6 +1,7 @@
 import React from 'react'
 import classes from './Profile.module.css'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
 
@@ -10,12 +11,12 @@ const Profile = () => {
     <div className={classes.profileWrapper}>
       <div className={classes.profileTop}>
         <div className={classes.profileImg}>
-          <img src='./images/image2.jpeg' alt='' />
+          <img src={user.image} alt='' />
         </div>
         <div className={classes.profileName}>
           <h1>
             {user.firstName} {user.lastName} <br />
-            <span>Co-Founder, HackSoft</span>
+            <span>{user.position}</span>
           </h1>
         </div>
       </div>
@@ -34,6 +35,7 @@ const Profile = () => {
         </div>
       </div>
 
+    <Link to='/profile'>
       <div className={classes.profileEdit}>
         <svg
           width='12'
@@ -50,6 +52,7 @@ const Profile = () => {
           />
         </svg>
       </div>
+      </Link>
     </div>
   )
 }

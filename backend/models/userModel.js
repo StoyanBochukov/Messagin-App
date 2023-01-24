@@ -18,9 +18,15 @@ const userSchema = mongoose.Schema({
         type: String,
         required:[true, 'Please add a pasword']
     },
+    position:{
+        type: String,
+        required: false,
+        default: 'HackSoft'
+    },
     image: {
         type: String,
-        required: false
+        required: false,
+        default: '/images/sample.jpg'
     }
 },{
     timestamps: true

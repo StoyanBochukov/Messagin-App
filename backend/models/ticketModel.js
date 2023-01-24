@@ -18,6 +18,14 @@ const ticketSchema = mongoose.Schema({
         required: true,
         default: 0
     },
+    position: {
+        type: String,
+        required: false
+    },
+    image: {
+        type: String,
+        required: false
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,

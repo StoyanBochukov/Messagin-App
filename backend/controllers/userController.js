@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models/userModel.js')
+const { use } = require('../routes/userRoutes.js')
 
 
 //Generate Token
@@ -15,7 +16,7 @@ const generateToken = (id, firstName) => {
 //route /api/users
 //access public
 const registerUser = asyncHandler( async(req, res) => {
-    const { firstName, lastName, email, password, image } = req.body
+    const { firstName, lastName, email, password, image, position } = req.body
 
     //Validation
     if(!firstName || !lastName || !email || !password){
@@ -38,7 +39,8 @@ const registerUser = asyncHandler( async(req, res) => {
         lastName,
         email,
         password: hashedPassword,
-        image: '/images/sample.jpg'
+        position,
+        image
     })
     if(user){
         res.status(201).json({
@@ -46,6 +48,8 @@ const registerUser = asyncHandler( async(req, res) => {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            position:user.position,
+            image: user.image,
             token: generateToken(user._id, user.firstName)
         })
     }else{
@@ -60,7 +64,7 @@ const registerUser = asyncHandler( async(req, res) => {
 
 const loginUser = asyncHandler( async(req, res) => {
     const { email, password } = req.body
-    const user = await User.findOne({email})
+    const user = await User.findOne({ email })
 
     //Check user and password
     if(user && (await bcrypt.compare(password, user.password))){
@@ -68,7 +72,9 @@ const loginUser = asyncHandler( async(req, res) => {
             _id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
+            position: user.position,
             email: user.email,
+            image: user.image,
             token: generateToken(user._id, user.firstName)
         })
     }else{
@@ -85,14 +91,52 @@ const getMe = asyncHandler(async (req, res) => {
         id: req.user._id,
         firstName: req.user.firstName,
         lastName: req.user.lastName,
+        position: req.user.position,
         email: req.user.email,
+        image: req.use.image
     }
     res.status(200).json(user)
+})
+
+const updateUserProfile = asyncHandler( async(req, res) =>{
+    const user = await User.findById(req.user._id)
+    if(user){
+        user.firstName = req.body.firstName || user.firstName
+        user.lastName = req.body.lastName || user.lastName
+        user.position = req.body.position || user.position
+        if(req.body.email){
+            user.email = req.body.email
+        }
+        if(req.body.password){
+            user.password = req.body.password
+        }
+        if(req.body.image){
+            user.image = req.body.image
+        }
+
+        const updatedUser = await user.save()
+       
+        res.json({
+            _id: updatedUser._id,
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            position: updatedUser.position,
+            email: updatedUser.email,
+            password: updatedUser.password,
+            image: updatedUser.image,
+            token: generateToken(updatedUser._id, updatedUser.firstName)
+
+        })
+    }else{
+        res.status(404)
+        throw new Error('User not found')
+    }
 })
 
 
 module.exports = {
     registerUser,
     loginUser,
-    getMe
+    getMe,
+    updateUserProfile
 }

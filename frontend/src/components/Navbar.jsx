@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { reset, logout } from '../redux/auth/authSlice'
 
 const Navbar = () => {
-
-  const { user } = useSelector(state => state.auth)
+  const { user } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -18,6 +17,7 @@ const Navbar = () => {
 
   return (
     <div className='navbar'>
+      <Link to='/'>
       <div className='logo'>
         <svg
           width='248'
@@ -80,27 +80,39 @@ const Navbar = () => {
           </defs>
         </svg>
       </div>
+      </Link>
 
       <div className='profile'>
         <ul>
           {!user ? (
             <>
-            <li>
-              <Link to='/login'><FaSignInAlt /> Login</Link>
-            </li>
-            <li>
-              <Link to='/register'><FaUser /> Register</Link>
-            </li>
+              <li>
+                <Link to='/login'>
+                  <FaSignInAlt /> Login
+                </Link>
+              </li>
+              <li>
+                <Link to='/register'>
+                  <FaUser /> Register
+                </Link>
+              </li>
             </>
           ) : (
-            <li>
-              <button onClick={logoutHandler}> <FaSignOutAlt /> Logout </button>
-            </li>
+            <>
+              <li>
+                <button onClick={logoutHandler}>
+                  {' '}
+                  <FaSignOutAlt /> Logout{' '}
+                </button>
+              </li>
+              <Link to='/profile'>
+                <div className='avatar'>
+                  <img src={user.image} alt='' />
+                </div>
+              </Link>
+            </>
           )}
         </ul>
-        <div className='avatar'>
-        <img src="./images/image2.jpeg" alt="" />
-        </div>
       </div>
     </div>
   )
